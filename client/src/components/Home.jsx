@@ -18,7 +18,7 @@ const Home = ({socket}) => {
       <label htmlFor="username">Username</label>
       <input
         type="text"
-        minLength={6}
+        minLength={1}
         name="username"
         id="username"
         className="username__input"

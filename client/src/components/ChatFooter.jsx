@@ -7,7 +7,9 @@ const ChatFooter = ({ socket }) => {
     socket.emit('typing', `${localStorage.getItem('userName')} is typing`);
 
   const handleTypingUp = () =>
-    socket.emit('typing', ``);
+    setTimeout(() => {
+      socket.emit('typing', `No one is typing`);
+    },1500)
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -17,9 +19,11 @@ const ChatFooter = ({ socket }) => {
         name: localStorage.getItem('userName'),
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
+        room: '4ME3tEinAn5R0AK5AAAB'
       });
     }
     setMessage('');
+    socket.emit('typing', ` `);
   };
   return (
     <div className="chat__footer">
@@ -31,6 +35,7 @@ const ChatFooter = ({ socket }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleTyping}
+          // onKeyUp={}
         />
         <button className="sendBtn">SEND</button>
       </form>
